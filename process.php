@@ -28,43 +28,18 @@ if (isset($_POST['register_alumni'])) {
         if (mysqli_num_rows($result) >= 1) {
         } else {
             $mysqli->query("INSERT INTO alumni(name, company, graduation_date, department, email, linkedin, password) VALUES('$name','$company','$graduation_date', '$department', '$email', '$linkedin', '$password')") or die($mysqli->error);
-            $sql = "SELECT * FROM alumni WHERE  email='$email'";
-            $result = $mysqli->query($sql)->fetch_assoc();
 
-            foreach ($areas_of_expertise as $item) {
-                echo "It's happening";
-                $mysqli->query("INSERT INTO alumni_area_of_expertise(id, area_of_expertise) VALUES($result[0], $item)");
+            // Store the area of expertise in alumni_area_of_expertise table
+            $sql = "SELECT id FROM `alumni` WHERE `email` LIKE '$email'";
+            $result = $mysqli->query($sql);
+            $row = mysqli_fetch_array($result);
+            $alumni_id = $row[0];
+
+            foreach ($areas_of_expertise as $expertise) {
+                $mysqli->query("INSERT INTO `alumni_area_of_expertise` (`al_id`, `expertise`) VALUES ('$alumni_id','$expertise');");
             }
         }
     }
-    // Add area of expertise in a separate table
-    // $sql = "SELECT * FROM alumni WHERE  email='$email' AND password='$password'";
-    // $result = $mysqli->query($sql);
-
-    // $row = $result->fetch_assoc();
-    // if ($result) {
-
-    //     if (mysqli_num_rows($result) >= 1) {
-    //         header("Location: alumni_profile.php");
-    //         exit();
-    //     } else {
-    //         echo "FAIL";
-    //         // $_SESSION['message'] = "Username and Password combiation incorrect";
-    //     }
-    // }
-
-
-
-
-    // echo "$name\r\n";
-    // echo "$company\r\n";
-    // echo "$graduation_date\r\n";
-    // echo "$department\r\n";
-    // echo "$linkedin\r\n";
-    // echo "$password\r\n";
-    // foreach ($area_of_expertise as $item) {
-    //     echo $item;
-    // }
 }
 
 // Alumni Login
