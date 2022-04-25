@@ -27,11 +27,12 @@ if (isset($_POST['register_student'])) {
     $sql = "SELECT * FROM student WHERE email='$email'" or die($mysqli->error);
     $result = $mysqli->query($sql);
     $row = $result->fetch_assoc();
+
     if ($result) {
 
         if (mysqli_num_rows($result) >= 1) {
         } else {
-            $mysqli->query("INSERT INTO student(name, school, college, hometown, blood_group, linkedin, department, dob, current_location, credits_completed, password) VALUES('$name','$school','$college', '$hometown', '$blood_group', '$linkedin', '$department', '$dob', '$current_location', '$credits_completed', '$password')") or die($mysqli->error);
+            $mysqli->query("INSERT INTO student(name, school, college, email, hometown, blood_group, linkedin, department, dob, current_location, credits_completed, password) VALUES('$name','$school','$college', '$email', '$hometown', '$blood_group', '$linkedin', '$department', '$dob', '$current_location', '$credits_completed', '$password')") or die($mysqli->error);
 
             $sql = "SELECT id FROM `student` WHERE `email` LIKE '$email'";
             $result = $mysqli->query($sql);
