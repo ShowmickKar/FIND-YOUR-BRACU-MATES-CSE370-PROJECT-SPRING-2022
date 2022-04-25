@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2022 at 12:34 AM
+-- Generation Time: Apr 26, 2022 at 12:40 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -20,6 +20,153 @@ SET time_zone = "+00:00";
 --
 -- Database: `bracu_mates`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alumni`
+--
+
+CREATE TABLE `alumni` (
+  `id` int(11) NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  `company` varchar(100) NOT NULL,
+  `graduation_date` date NOT NULL,
+  `department` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `linkedin` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `alumni`
+--
+
+INSERT INTO `alumni` (`id`, `Name`, `company`, `graduation_date`, `department`, `email`, `linkedin`, `password`) VALUES
+(77, 'Shafin Khandaker', 'Google', '2022-04-01', 'CSE', 'shafin@gmail.com', 'Shafin-Linkedin', 'shafin123'),
+(78, '', '', '0000-00-00', '', '', '', ''),
+(79, 'dasdas', 'dada', '2022-04-07', 'cas', 'dasasfqwff', 'das', 'ss'),
+(80, 'dasdas', 'dada', '2022-04-07', 'cas', 'dasasfqwwwdff', 'das', 'dasdas');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alumni_area_of_expertise`
+--
+
+CREATE TABLE `alumni_area_of_expertise` (
+  `al_id` int(11) DEFAULT NULL,
+  `expertise` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `alumni_area_of_expertise`
+--
+
+INSERT INTO `alumni_area_of_expertise` (`al_id`, `expertise`) VALUES
+(77, 'Machine Learning'),
+(77, 'System Design and Analysis'),
+(79, 'Machine Learning'),
+(79, 'Frontend Engineering'),
+(80, 'Machine Learning'),
+(80, 'Frontend Engineering'),
+(80, 'Backend Engineering'),
+(80, 'System Design and Analysis');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donor`
+--
+
+CREATE TABLE `donor` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `dob` date NOT NULL,
+  `blood_group` varchar(100) NOT NULL,
+  `last_donation` date NOT NULL,
+  `weight` decimal(10,0) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `donor`
+--
+
+INSERT INTO `donor` (`id`, `name`, `phone`, `email`, `dob`, `blood_group`, `last_donation`, `weight`, `password`) VALUES
+(2, 'Showmick Kar', '013424234', 'showmick12@gmail.com', '2022-04-04', 'AB+', '2022-04-21', '45', '2121'),
+(3, 'Showmick Kar', '+8801776365131', 'showmick.kar@g.bracu.ac.bd', '2022-04-07', 'AB+', '2022-04-06', '45', '1111');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donor_available_location`
+--
+
+CREATE TABLE `donor_available_location` (
+  `d_id` int(11) NOT NULL,
+  `location` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `donor_available_location`
+--
+
+INSERT INTO `donor_available_location` (`d_id`, `location`) VALUES
+(3, 'Mohakhali'),
+(3, 'Dhanmondi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donor_health_condition`
+--
+
+CREATE TABLE `donor_health_condition` (
+  `d_id` int(11) NOT NULL,
+  `health_condition` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `donor_health_condition`
+--
+
+INSERT INTO `donor_health_condition` (`d_id`, `health_condition`) VALUES
+(2, 'Heart Diseases'),
+(2, 'Kidney Diseases'),
+(3, 'Kidney Diseases'),
+(3, 'Covid Vaccinated');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faq`
+--
+
+CREATE TABLE `faq` (
+  `id` int(11) NOT NULL,
+  `question` varchar(100) NOT NULL,
+  `answer` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `faq`
+--
+
+INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
+(9, 'Q1', 'A1'),
+(10, 'Q2', 'A2'),
+(11, 'Q3', 'A4'),
+(13, 'Hello', '-'),
+(14, 'asdasdas', 'answer'),
+(15, 'dada', 'answer'),
+(16, 'dada', '-'),
+(17, 'dasdasdas', '-'),
+(18, 'dada', '-'),
+(19, 'What is a Dog?', 'It\'s an animal'),
+(20, 'Hello Kittly!', 'You question has been answered');
 
 -- --------------------------------------------------------
 
@@ -53,9 +200,120 @@ INSERT INTO `student` (`id`, `name`, `school`, `college`, `email`, `hometown`, `
 (3, 'Maidul Islam', 'dasdas aasda', 'sdasda sadasd', 'asidnis7bd', 'asdas', '', 'asdas', 'dad', '2022-04-08', 'dasdas', 1212, 'dsaa'),
 (4, 'Maidul Islam', 'Pabna Zilla School', 'Pabna Govt. Edward University College', 'maidul@gmail.com', 'Pabna', 'AB+', 'https://www.linkedin.com/in/showmick-kar/', 'CSE', '2022-03-30', 'Mohakhali', 54, '2121');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_club`
+--
+
+CREATE TABLE `student_club` (
+  `s_id` int(11) NOT NULL,
+  `club` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_club`
+--
+
+INSERT INTO `student_club` (`s_id`, `club`) VALUES
+(1, 'BRAC University Cultural Club'),
+(1, 'Robotics Club Of BRAC University'),
+(2, 'BRAC University Cultural Club'),
+(2, 'Robotics Club Of BRAC University'),
+(3, 'BRAC University Cultural Club'),
+(3, 'Robotics Club Of BRAC University'),
+(4, 'Robotics Club Of BRAC University');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_field_of_interest`
+--
+
+CREATE TABLE `student_field_of_interest` (
+  `s_id` int(11) NOT NULL,
+  `field_of_interest` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_field_of_interest`
+--
+
+INSERT INTO `student_field_of_interest` (`s_id`, `field_of_interest`) VALUES
+(1, 'Machine Learning'),
+(1, 'Backend Engineering'),
+(2, 'Machine Learning'),
+(2, 'Frontend Engineering'),
+(3, 'Machine Learning'),
+(3, 'Frontend Engineering'),
+(4, 'Machine Learning'),
+(4, 'Backend Engineering');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_hobby`
+--
+
+CREATE TABLE `student_hobby` (
+  `s_id` int(11) NOT NULL,
+  `hobby` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_hobby`
+--
+
+INSERT INTO `student_hobby` (`s_id`, `hobby`) VALUES
+(1, 'Music'),
+(1, 'Gardening'),
+(1, 'Post-card Collection'),
+(2, 'Music'),
+(2, 'Coin Collection'),
+(3, 'Music'),
+(3, 'Coin Collection'),
+(4, 'Music'),
+(4, 'Photography');
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `alumni`
+--
+ALTER TABLE `alumni`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `alumni_area_of_expertise`
+--
+ALTER TABLE `alumni_area_of_expertise`
+  ADD KEY `par_ind` (`al_id`);
+
+--
+-- Indexes for table `donor`
+--
+ALTER TABLE `donor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `donor_available_location`
+--
+ALTER TABLE `donor_available_location`
+  ADD KEY `d_id` (`d_id`);
+
+--
+-- Indexes for table `donor_health_condition`
+--
+ALTER TABLE `donor_health_condition`
+  ADD KEY `d_id` (`d_id`);
+
+--
+-- Indexes for table `faq`
+--
+ALTER TABLE `faq`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `student`
@@ -64,14 +322,90 @@ ALTER TABLE `student`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `student_club`
+--
+ALTER TABLE `student_club`
+  ADD KEY `s_id` (`s_id`);
+
+--
+-- Indexes for table `student_field_of_interest`
+--
+ALTER TABLE `student_field_of_interest`
+  ADD KEY `s_id` (`s_id`);
+
+--
+-- Indexes for table `student_hobby`
+--
+ALTER TABLE `student_hobby`
+  ADD KEY `s_id` (`s_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `alumni`
+--
+ALTER TABLE `alumni`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+--
+-- AUTO_INCREMENT for table `donor`
+--
+ALTER TABLE `donor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `faq`
+--
+ALTER TABLE `faq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `alumni_area_of_expertise`
+--
+ALTER TABLE `alumni_area_of_expertise`
+  ADD CONSTRAINT `alumni_area_of_expertise_ibfk_1` FOREIGN KEY (`al_id`) REFERENCES `alumni` (`id`);
+
+--
+-- Constraints for table `donor_available_location`
+--
+ALTER TABLE `donor_available_location`
+  ADD CONSTRAINT `donor_available_location_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `donor` (`id`);
+
+--
+-- Constraints for table `donor_health_condition`
+--
+ALTER TABLE `donor_health_condition`
+  ADD CONSTRAINT `donor_health_condition_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `donor` (`id`);
+
+--
+-- Constraints for table `student_club`
+--
+ALTER TABLE `student_club`
+  ADD CONSTRAINT `student_club_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `student` (`id`);
+
+--
+-- Constraints for table `student_field_of_interest`
+--
+ALTER TABLE `student_field_of_interest`
+  ADD CONSTRAINT `student_field_of_interest_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `student` (`id`);
+
+--
+-- Constraints for table `student_hobby`
+--
+ALTER TABLE `student_hobby`
+  ADD CONSTRAINT `student_hobby_ibfk_1` FOREIGN KEY (`s_id`) REFERENCES `student` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
