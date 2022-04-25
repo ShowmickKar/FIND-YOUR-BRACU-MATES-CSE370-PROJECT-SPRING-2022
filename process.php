@@ -3,6 +3,8 @@
 $mysqli = new mysqli('localhost', 'root', '', 'bracu_mates') or die(mysqli_error($mysqli));
 
 
+/* REGISTRATION AND LOGIN SECTION */
+
 // Student Registration
 
 if (isset($_POST['register_student'])) {
@@ -192,5 +194,15 @@ if (isset($_POST['login_alumni'])) {
         } else {
             echo "FAIL";
         }
+    }
+}
+
+/* FAQ SECTION*/
+
+// handle posting questions
+if (isset($_POST['post_student_question'])) {
+    $question = $_POST['question'];
+    if ($question != "") {
+        $mysqli->query("INSERT INTO faq(question, answer) VALUES('$question', '-')");
     }
 }
