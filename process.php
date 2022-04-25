@@ -24,7 +24,7 @@ if (isset($_POST['register_student'])) {
     $hobbies = $_POST['hobby'];
 
 
-    $sql = "SELECT * FROM student WHERE email='$email'" or die($mysqli->error);
+    $sql = "SELECT * FROM `student` WHERE email='$email'" or die($mysqli->error);
     $result = $mysqli->query($sql);
     $row = $result->fetch_assoc();
 
