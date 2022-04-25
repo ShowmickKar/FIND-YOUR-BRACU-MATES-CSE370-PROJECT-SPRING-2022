@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2022 at 08:54 PM
+-- Generation Time: Apr 25, 2022 at 11:34 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -143,6 +143,16 @@ CREATE TABLE `faq` (
   `answer` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `faq`
+--
+
+INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
+(9, 'Q1', 'A1'),
+(10, 'Q2', 'A2'),
+(11, 'Q3', 'A4'),
+(12, 'Q4', 'A4');
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +164,7 @@ CREATE TABLE `student` (
   `name` varchar(100) NOT NULL,
   `school` varchar(100) NOT NULL,
   `college` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `hometown` varchar(100) NOT NULL,
   `blood_group` varchar(100) NOT NULL,
   `linkedin` varchar(100) NOT NULL,
@@ -163,6 +174,15 @@ CREATE TABLE `student` (
   `credits_completed` int(11) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`id`, `name`, `school`, `college`, `email`, `hometown`, `blood_group`, `linkedin`, `department`, `dob`, `current_location`, `credits_completed`, `password`) VALUES
+(1, 'asdasd', 'dasda', 'das', 'dasdas', 'das', '', 'dasdas', 'dasdas', '2022-04-07', 'das', 1212, 'dasda'),
+(2, 'Maidul Islam', 'dasdas', 'sdasda', 'dasdasafgeref', 'asdas', '', 'asdas', 'dad', '2022-04-08', 'dasdas', 1212, 'dasda'),
+(3, 'Maidul Islam', 'dasdas aasda', 'sdasda sadasd', 'asidnis7bd', 'asdas', '', 'asdas', 'dad', '2022-04-08', 'dasdas', 1212, 'dsaa');
 
 -- --------------------------------------------------------
 
@@ -175,6 +195,18 @@ CREATE TABLE `student_club` (
   `club` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `student_club`
+--
+
+INSERT INTO `student_club` (`s_id`, `club`) VALUES
+(1, 'BRAC University Cultural Club'),
+(1, 'Robotics Club Of BRAC University'),
+(2, 'BRAC University Cultural Club'),
+(2, 'Robotics Club Of BRAC University'),
+(3, 'BRAC University Cultural Club'),
+(3, 'Robotics Club Of BRAC University');
+
 -- --------------------------------------------------------
 
 --
@@ -186,6 +218,18 @@ CREATE TABLE `student_field_of_interest` (
   `field_of_interest` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `student_field_of_interest`
+--
+
+INSERT INTO `student_field_of_interest` (`s_id`, `field_of_interest`) VALUES
+(1, 'Machine Learning'),
+(1, 'Backend Engineering'),
+(2, 'Machine Learning'),
+(2, 'Frontend Engineering'),
+(3, 'Machine Learning'),
+(3, 'Frontend Engineering');
+
 -- --------------------------------------------------------
 
 --
@@ -196,6 +240,19 @@ CREATE TABLE `student_hobby` (
   `s_id` int(11) NOT NULL,
   `hobby` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_hobby`
+--
+
+INSERT INTO `student_hobby` (`s_id`, `hobby`) VALUES
+(1, 'Music'),
+(1, 'Gardening'),
+(1, 'Post-card Collection'),
+(2, 'Music'),
+(2, 'Coin Collection'),
+(3, 'Music'),
+(3, 'Coin Collection');
 
 --
 -- Indexes for dumped tables
@@ -281,13 +338,13 @@ ALTER TABLE `donor`
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
