@@ -1,195 +1,109 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-$mysqli = new mysqli('localhost', 'root', '', 'bracu_mates') or die(mysqli_error($mysqli));
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Student Registration Page</title>
+</head>
 
+<body>
 
-/* TODO: STUDENT REGISTRATION AND LOGIN */
+    <h1><b><u>Student Registration</u></b></h1>
 
-if (isset($_POST['register_student'])) {
-    $name = $_POST['name'];
-    $school = $_POST['school'];
-    $college = $_POST['college'];
-    $hometown = $_POST['hometown'];
-    $blood_group = $_POST['blood_group'];
-    $linkedin = $_POST['linkedin'];
-    $department = $_POST['department'];
-    $dob = $_POST['dob'];
-    $email = $_POST['email'];
-    $current_location = $_POST['current_location'];
-    $credits_completed = $_POST['credits_completed'];
-    $password = $_POST['password'];
+    <p>Fill up the form to complete your registration</p><br>
 
-    $clubs = $_POST['club'];
-    $fields_of_interest = $_POST['field_of_interest'];
-    $hobbies = $_POST['hobby'];
+    <div>
+        <form action="process.php" method="POST">
+            <label for="">Name</label>
+            <input type="text" name='name' placeholder="Your Name" value=""><br>
+            <label for="">School</label>
+            <input type="text" name='school' placeholder="Your School" value=""><br>
+            <label for="">College</label>
+            <input type="text" S name='college' placeholder="Your College" value=""><br>
+            <label for="">Hometown</label>
+            <input type="text" S name='hometown' placeholder="Your Hometown" value=""><br>
+            <label for="">Current Location</label>
+            <input type="text" S name='current_location' placeholder="Your Location" value=""><br>
 
+            <label for=""><b><u>Hobbies</u></b></label><br>
+            <input type="checkbox" name="hobby[]" value="Music">
+            <label for="expertise1"> Music</label><br>
+            <input type="checkbox" name="hobby[]" value="Gardening">
+            <label for="expertise2"> Gardening</label><br>
+            <input type="checkbox" name="hobby[]" value="Coin Collection">
+            <label for="expertise3"> Coin Collection</label><br>
+            <input type="checkbox" name="hobby[]" value="Dancing">
+            <label for="expertise4"> Dancing</label><br>
+            <input type="checkbox" name="hobby[]" value="Post-card Collection">
+            <label for="expertise1"> Post-card Collection</label><br>
+            <input type="checkbox" name="hobby[]" value="Photography">
+            <label for="expertise2"> Photography</label><br>
+            <input type="checkbox" name="hobby[]" value="Journalizing">
+            <label for="expertise3"> Journalizing</label><br>
+            <input type="checkbox" name="hobby[]" value="Others">
+            <label for="expertise4"> Others</label><br>
 
-    $sql = "SELECT * FROM student WHERE email='$email'" or die($mysqli->error);
-    $result = $mysqli->query($sql);
-    $row = $result->fetch_assoc();
+            <label for="">Blood Group</label>
+            <input type="text" S name='blood_group' placeholder="Your Blood Group" value=""><br>
+            <label for=""><b><u>Clubs You're in(Select All That Applies)</u></b></label><br>
+            <input type="checkbox" name="club[]" value="BRAC University Cultural Club">
+            <label for="expertise1"> BRAC University Cultural Club</label><br>
+            <input type="checkbox" name="club[]" value="Robotics Club Of BRAC University">
+            <label for="expertise2"> Robotics Club Of BRAC University</label><br>
+            <input type="checkbox" name="club[]" value="BRAC University Adventure Club">
+            <label for="expertise3"> BRAC University Adventure Club</label><br>
+            <input type="checkbox" name="club[]" value="BRAC University Art And Photographic Society">
+            <label for="expertise4"> BRAC University Art And Photographic Society</label><br>
+            <input type="checkbox" name="club[]" value="BRAC University Business and Economics Forum">
+            <label for="expertise1"> BRAC University Business and Economics Forum</label><br>
+            <input type="checkbox" name="club[]" value="BRAC University Business Club">
+            <label for="expertise2"> BRAC University Business Club</label><br>
+            <input type="checkbox" name="club[]" value="BRAC University CHESS Club">
+            <label for="expertise3"> BRAC University CHESS Club</label><br>
+            <input type="checkbox" name="club[]" value="Others">
+            <label for="expertise4"> Others</label><br>
 
-    if ($result) {
+            <label for="">Date of Birth</label>
+            <input type="date" name='dob' placeholder="Your Birth Date" value=""><br>
 
-        if (mysqli_num_rows($result) >= 1) {
-        } else {
-            $mysqli->query("INSERT INTO student(name, school, college, email, hometown, blood_group, linkedin, department, dob, current_location, credits_completed, password) VALUES('$name','$school','$college', '$email', '$hometown', '$blood_group', '$linkedin', '$department', '$dob', '$current_location', '$credits_completed', '$password')") or die($mysqli->error);
+            <label for="">Fields of Interests</label><br>
+            <input type="checkbox" name="field_of_interest[]" value="Machine Learning">
+            <label for="expertise1"> Machine Learning</label><br>
+            <input type="checkbox" name="field_of_interest[]" value="Frontend Engineering">
+            <label for="expertise2"> Frontend Engineering</label><br>
+            <input type="checkbox" name="field_of_interest[]" value="Backend Engineering">
+            <label for="expertise3"> Backend Engineering</label><br>
+            <input type="checkbox" name="filed_of_interest[]" value="System Design and Analysis">
+            <label for="expertise4"> System Design and Analysis</label><br>
 
-            $sql = "SELECT id FROM `student` WHERE `email` LIKE '$email'";
-            $result = $mysqli->query($sql);
-            $row = mysqli_fetch_array($result);
-            $student_id = $row[0];
+            <label for="">Linkedin</label>
+            <input type="text" placeholder="Linkedin Profile" name='linkedin' value=""><br>
+            <label for="">Email</label>
+            <input type="text" placeholder="Your Email" name='email' value=""><br>
+            <label for="">University Department</label>
+            <input type="text" placeholder="Your Department" name='department' value=""><br>
+            <label for="">Credits Completed</label>
+            <input type="text" placeholder="Your Credits Completed" name='credits_completed' value=""><br>
+            <label for="">Set a Password</label>
+            <input type="password" placeholder="Enter Password" name='password' value=""><br><br>
 
-            foreach ($clubs as $club) {
-                $mysqli->query("INSERT INTO `student_club` (`s_id`, `club`) VALUES ('$student_id','$club');");
-            }
+            <button type="submit" name="register_student" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div>
+        <form action="">
 
-            foreach ($fields_of_interest as $field_of_interest) {
-                $mysqli->query("INSERT INTO `student_field_of_interest` (`s_id`, `field_of_interest`) VALUES ('$student_id','$field_of_interest');");
-            }
+        </form>
+    </div>
 
-            foreach ($hobbies as $hobby) {
-                $mysqli->query("INSERT INTO `student_hobby` (`s_id`, `hobby`) VALUES ('$student_id','$hobby');");
-            }
-        }
-    }
-}
+    <script src=" https://c...content-available-to-author-only...y.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://c...content-available-to-author-only...r.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://c...content-available-to-author-only...r.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
 
-// Student Login
-
-if (isset($_POST['login_student'])) {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $sql = "SELECT * FROM student WHERE  email='$email' AND password='$password'";
-    $result = $mysqli->query($sql);
-
-    $row = $result->fetch_assoc();
-    if ($result) {
-
-        if (mysqli_num_rows($result) >= 1) {
-            header("Location: student_profile.php");
-            exit();
-        } else {
-            echo "FAIL";
-        }
-    }
-}
-
-
-
-// Donor Registration
-if (isset($_POST['register_donor'])) {
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $dob = $_POST['dob'];
-    $blood_group = $_POST['blood_group'];
-    $last_donation = $_POST['last_donation'];
-    $weight = $_POST['weight'];
-    $password = $_POST['password'];
-    $available_locations = $_POST['available_location'];
-    $health_conditions = $_POST['health_condition'];
-
-
-    $sql = "SELECT * FROM donor WHERE  email='$email'";
-    $result = $mysqli->query($sql);
-    $row = $result->fetch_assoc();
-    if ($result) {
-
-        if (mysqli_num_rows($result) >= 1) {
-        } else {
-            $mysqli->query("INSERT INTO donor(name, phone, email, dob, blood_group, last_donation, weight, password) VALUES('$name','$phone','$email', '$dob', '$blood_group', '$last_donation', '$weight', '$password')") or die($mysqli->error);
-
-            // Store the area of expertise in alumni_area_of_expertise table
-            $sql = "SELECT id FROM `donor` WHERE `email` LIKE '$email'";
-            $result = $mysqli->query($sql);
-            $row = mysqli_fetch_array($result);
-            $donor_id = $row[0];
-
-            foreach ($available_locations as $location) {
-                $mysqli->query("INSERT INTO `donor_available_location` (`d_id`, `location`) VALUES ('$donor_id','$location');");
-            }
-
-            foreach ($health_conditions as $health_condition) {
-                $mysqli->query("INSERT INTO `donor_health_condition` (`d_id`, `health_condition`) VALUES ('$donor_id','$health_condition');");
-            }
-        }
-    }
-}
-
-// Donor Login
-
-if (isset($_POST['login_donor'])) {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $sql = "SELECT * FROM donor WHERE  email='$email' AND password='$password'";
-    $result = $mysqli->query($sql);
-
-    $row = $result->fetch_assoc();
-    if ($result) {
-
-        if (mysqli_num_rows($result) >= 1) {
-            header("Location: donor_profile.php");
-            exit();
-        } else {
-            echo "FAIL";
-        }
-    }
-}
-
-
-// Alumni Registration
-if (isset($_POST['register_alumni'])) {
-    $name = $_POST['name'];
-    $company = $_POST['company'];
-    $graduation_date = $_POST['graduation_date'];
-    $department = $_POST['department'];
-    $email = $_POST['email'];
-    $linkedin = $_POST['linkedin'];
-    $password = $_POST['password'];
-    $areas_of_expertise = $_POST['expertise'];
-
-    // Prevent multiple registration
-    $sql = "SELECT * FROM alumni WHERE  email='$email'";
-    $result = $mysqli->query($sql);
-    $row = $result->fetch_assoc();
-    if ($result) {
-
-        if (mysqli_num_rows($result) >= 1) {
-        } else {
-            $mysqli->query("INSERT INTO alumni(name, company, graduation_date, department, email, linkedin, password) VALUES('$name','$company','$graduation_date', '$department', '$email', '$linkedin', '$password')") or die($mysqli->error);
-
-            // Store the area of expertise in alumni_area_of_expertise table
-            $sql = "SELECT id FROM `alumni` WHERE `email` LIKE '$email'";
-            $result = $mysqli->query($sql);
-            $row = mysqli_fetch_array($result);
-            $alumni_id = $row[0];
-
-            foreach ($areas_of_expertise as $expertise) {
-                $mysqli->query("INSERT INTO `alumni_area_of_expertise` (`al_id`, `expertise`) VALUES ('$alumni_id','$expertise');");
-            }
-        }
-    }
-}
-
-// Alumni Login
-
-if (isset($_POST['login_alumni'])) {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $sql = "SELECT * FROM alumni WHERE  email='$email' AND password='$password'";
-    $result = $mysqli->query($sql);
-
-    $row = $result->fetch_assoc();
-    if ($result) {
-
-        if (mysqli_num_rows($result) >= 1) {
-            header("Location: alumni_profile.php");
-            exit();
-        } else {
-            echo "FAIL";
-        }
-    }
-}
+</html>
