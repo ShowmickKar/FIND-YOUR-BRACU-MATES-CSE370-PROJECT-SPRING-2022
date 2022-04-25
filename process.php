@@ -3,7 +3,7 @@
 $mysqli = new mysqli('localhost', 'root', '', 'bracu_mates') or die(mysqli_error($mysqli));
 
 
-/* TODO: STUDENT REGISTRATION AND LOGIN */
+// Student Registration
 
 if (isset($_POST['register_student'])) {
     $name = $_POST['name'];
@@ -60,7 +60,7 @@ if (isset($_POST['login_student'])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $sql = "SELECT * FROM student WHERE  email='$email' AND password='$password'";
+    $sql = "SELECT * FROM student WHERE email='$email' AND password='$password'";
     $result = $mysqli->query($sql);
 
     $row = $result->fetch_assoc();
@@ -70,6 +70,7 @@ if (isset($_POST['login_student'])) {
             header("Location: student_profile.php");
             exit();
         } else {
+            echo '<h1>$email</h1>';
             echo "FAIL";
         }
     }
