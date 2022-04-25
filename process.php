@@ -19,12 +19,12 @@ if (isset($_POST['register_student'])) {
     $credits_completed = $_POST['credits_completed'];
     $password = $_POST['password'];
 
-    $clubs = $_POST['club[]'];
+    $clubs = $_POST['club'];
     $fields_of_interest = $_POST['field_of_interest'];
     $hobbies = $_POST['hobby'];
 
 
-    $sql = "SELECT * FROM student WHERE  email='$email'";
+    $sql = "SELECT * FROM student WHERE email='$email'" or die($mysqli->error);
     $result = $mysqli->query($sql);
     $row = $result->fetch_assoc();
     if ($result) {
@@ -33,7 +33,6 @@ if (isset($_POST['register_student'])) {
         } else {
             $mysqli->query("INSERT INTO student(name, school, college, hometown, blood_group, linkedin, department, dob, current_location, credits_completed, password) VALUES('$name','$school','$college', '$hometown', '$blood_group', '$linkedin', '$department', '$dob', '$current_location', '$credits_completed', '$password')") or die($mysqli->error);
 
-            // Store the area of expertise in alumni_area_of_expertise table
             $sql = "SELECT id FROM `student` WHERE `email` LIKE '$email'";
             $result = $mysqli->query($sql);
             $row = mysqli_fetch_array($result);
