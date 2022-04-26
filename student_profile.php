@@ -21,7 +21,9 @@
     <div class='text-center p-4'>
         <a href="search.php" class="btn btn-primary mb-4">Search</a></br>
         <a href="faq.php" class="btn btn-success mb-4">Frequently Asked Questions</a></br>
-        <a href="index.php" class="btn btn-primary mb-4">Logout</a> 
+        <a href="lost_and_found.php" class="btn btn-success mb-4">Lost & Found</a>   </br>
+        <a href="index.php" class="btn btn-primary mb-4">Logout</a>
+         
         
         
     </div>
