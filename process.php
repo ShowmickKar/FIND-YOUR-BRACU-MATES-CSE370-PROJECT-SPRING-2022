@@ -5,10 +5,10 @@ $mysqli = new mysqli('localhost', 'root', '', 'bracu_mates') or die(mysqli_error
 
 /* Handle error messages during failed login */
 
-function manage_error_message()
-{
-    echo "<alert>Login Failed, Please Register First</alert>";
-}
+// function manage_error_message()
+// {
+//     echo "<alert>Login Failed, Please Register First</alert>";
+// }
 
 /* REGISTRATION AND LOGIN SECTION */
 
@@ -82,8 +82,7 @@ if (isset($_POST['login_student'])) {
             header("Location: student_profile.php");
             exit();
         } else {
-            echo '<h1>$email</h1>';
-            echo "FAIL";
+            header("Location: student_registration.php");
         }
     }
 }
@@ -152,7 +151,7 @@ if (isset($_POST['login_donor'])) {
             header("Location: donor_profile.php");
             exit();
         } else {
-            echo "FAIL";
+            header("Location: donor_registration.php");
         }
     }
 }
