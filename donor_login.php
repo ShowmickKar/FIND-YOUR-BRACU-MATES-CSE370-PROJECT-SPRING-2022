@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="password">
-                    Donor Email
+                    Donor Password
                 </label>
                 <input type="password" name="password" placeholder="Your password" value="">
             </div>
