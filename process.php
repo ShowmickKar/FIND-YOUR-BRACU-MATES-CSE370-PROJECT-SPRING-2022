@@ -233,6 +233,6 @@ if (isset($_POST['post_lost_and_found_report'])) {
     $place = $_POST['place'];
     $report_date = $_POST['report_date'];
     if ($item_name != "") {
-        $mysqli->query("INSERT INTO lost_and_found(reporter_email, item_name, report_date, place) VALUES('$report_date', '$item_name', '$place', '$report_date')");
+        $mysqli->query("INSERT INTO lost_and_found(reporter_email, item_name, report_date, place) VALUES('$reporter_email', '$item_name', '$report_dater', '$place')");
     }
 }
