@@ -20,6 +20,8 @@
         <form action="process.php" method="POST">
             <label for="">Name</label>
             <input type="text" name='name' placeholder="Your Name" value=""><br>
+            <label for="">Student ID</label>
+            <input type="number" name='id' placeholder="Your Student ID" value=""><br>
             <label for="">School</label>
             <input type="text" name='school' placeholder="Your School" value=""><br>
             <label for="">College</label>
