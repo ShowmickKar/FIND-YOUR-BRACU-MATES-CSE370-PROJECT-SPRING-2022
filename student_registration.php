@@ -50,7 +50,17 @@
             <label for="expertise4"> Others</label><br>
 
             <label for="">Blood Group</label>
-            <input type="text" S name='blood_group' placeholder="Your Blood Group" value=""><br>
+            <select name="blood_group" id="cars">
+                <option value="A+">A+</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select><br>
             <label for=""><b><u>Clubs You're in(Select All That Applies)</u></b></label><br>
             <input type="checkbox" name="club[]" value="BRAC University Cultural Club">
             <label for="expertise1"> BRAC University Cultural Club</label><br>
