@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="password">
-                    Alumni Email
+                    Alumni Password
                 </label>
                 <input type="password" name="password" placeholder="Your password" value="">
             </div>
