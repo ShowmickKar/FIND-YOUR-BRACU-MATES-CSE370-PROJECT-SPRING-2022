@@ -29,7 +29,19 @@
             <input type="text" placeholder="Your Email" name='email' value=""><br>
 
             <label for="">Blood Group</label>
-            <input type="text" placeholder="Blood Group" name='blood_group' value=""><br>
+            <!-- <input type="text" placeholder="Blood Group" name='blood_group' value=""><br> --> -->
+            <select name="blood_group" id="cars">
+                <option value="A+">A+</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+            </br>
             <label for="">Weight</label>
             <input type="text" placeholder="Weight" name='weight' value=""><br>
             <label for="">Location</label><br>
