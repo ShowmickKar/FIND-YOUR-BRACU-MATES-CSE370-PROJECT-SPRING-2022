@@ -39,60 +39,31 @@ $mysqli = new mysqli('localhost', 'root', '', 'bracu_mates') or die(mysqli_error
         </thead>
         <tbody>
             <?php
-            $sql = "SELECT question from `faq`";
+            $sql = "SELECT `id`, `question`, `answer` FROM faq";
             $result = $mysqli->query($sql);
-            $questions = mysqli_fetch_array($result);
 
-            $sql = "SELECT answer FROM `faq`";
-            $result = $mysqli->query($sql);
-            $answers = mysqli_fetch_array($result);
 
-            // $sql  = "SELECT id from `faq`"
-
-            $num_questions = count(array($questions));
-
-            for ($i = 0; $i < $num_questions; $i++) {
-                echo "<tr>
-                    <td>$questions[$i]</td>
-                    <td>$answers[$i]</td>
-                </tr>";
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                        <td>{$row['question']}</td>
+                        <td>{$row['answer']}</td>
+                    </tr>";
+                }
+            } else {
+                // echo "0 results";
             }
 
             ?>
-            <!-- <tr>
-                <td>Question 1</td>
-                <td>Answer 1</td>
-            </tr>
-            <tr>
-                <td>Question 1</td>
-                <td>Answer 2</td>
-            </tr> -->
         </tbody>
     </table>
     <form action="faq.php" method="POST">
         <form-group>
-            <!-- <label for=""><b>Your Question</b></label> -->
             <h1>Post Your Question</h1>
             <input style="margin-left:10px; height:200px; width: 700px" type="text" name="question">
         </form-group>
         <form-group><button type='submit' class='btn btn-primary' name="post_student_question">Post</button></form-group>
     </form>
-    <!-- <table>
-        <tr>
-            <th>Question</th>
-            <th>Answer</th>
-        </tr>
-        <tr>
-            <td>What's a dog</td>
-            <td>A dog is an animal</td>
-        </tr>
-        <tr>
-            <td>What's a dog</td>
-            <td>A dog is an animal</td>
-        </tr>
-    </table> -->
-    <!-- Ask a new Question -->
-
 </body>
 
 </html>
