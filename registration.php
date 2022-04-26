@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    <h1>This is Registration Page</h1>
-    <div>
+    <h1 class='text-center mt-4'>This is Registration Page</h1>
+    <div class='text-center p-4'>
 
-        <ul>
+        <!-- <ul>
             <li><a href="student_registration.php">Register as Student</a></li>
         </ul>
         <ul>
@@ -22,7 +22,10 @@
         </ul>
         <ul>
             <li><a href="donor_registration.php">Register as Donor</a></li>
-        </ul>
+        </ul> -->
+        <a href="student_registration.php" class="btn btn-primary mb-4">Register as Student</a> </br>
+        <a href="alumni_registration.php" class="btn btn-success mb-4">Register as Alumni</a></br>
+        <a href="donor_registration.php" class="btn btn-primary ">Register as Donor</a>
     </div>
 
     <script src=" https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
