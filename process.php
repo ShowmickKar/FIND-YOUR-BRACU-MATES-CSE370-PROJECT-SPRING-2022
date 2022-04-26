@@ -188,6 +188,7 @@ if (isset($_POST['register_alumni'])) {
             foreach ($areas_of_expertise as $expertise) {
                 $mysqli->query("INSERT INTO `alumni_area_of_expertise` (`al_id`, `expertise`) VALUES ('$alumni_id','$expertise');");
             }
+            header("Location: alumni_login.php");
         }
     } else {
         header("Location: alumni_registration.php");
