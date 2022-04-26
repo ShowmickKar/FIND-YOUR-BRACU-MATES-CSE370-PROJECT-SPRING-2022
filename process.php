@@ -83,7 +83,7 @@ if (isset($_POST['login_student'])) {
             header("Location: student_profile.php");
             exit();
         } else {
-            header("Location: student_registration.php");
+            header("Location: student_login.php");
         }
     }
 }
@@ -152,7 +152,7 @@ if (isset($_POST['login_donor'])) {
             header("Location: donor_profile.php");
             exit();
         } else {
-            header("Location: donor_registration.php");
+            header("Location: donor_login.php");
         }
     }
 }
@@ -210,7 +210,7 @@ if (isset($_POST['login_alumni'])) {
             header("Location: alumni_profile.php");
             exit();
         } else {
-            header("Location: alumni_registration.php");
+            header("Location: alumni_login.php");
         }
     }
 }
