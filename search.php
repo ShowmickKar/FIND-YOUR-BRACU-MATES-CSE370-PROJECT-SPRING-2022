@@ -261,7 +261,7 @@
                                             }
                                         }
 
-                                        elseif(mysqli_num_rows($query_run) <= 0)
+                                        elseif(mysqli_num_rows($query_run) <= 0)//here
                                         {
                                             $query2 = "SELECT * FROM student_club WHERE CONCAT(s_id,club) LIKE '%$filtervalues%'";
                                             $query_run2 = mysqli_query($con, $query2);
@@ -323,7 +323,83 @@
 
                                             }
                                                
+                                        }//new code starts here
+                                        elseif(mysqli_num_rows($query_run2) <= 0){
+                                            {
+                                                $query6 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$filtervalues%'";
+                                                $query_run6 = mysqli_query($con, $query6);
+                                                if(mysqli_num_rows($query_run6) > 0)
+                                            {   
+                                                foreach($query_run6 as $items){
+                                                    $al_id = $items['s_id'];
+                                                    $query7 = "SELECT * FROM student_club WHERE CONCAT(s_id, club) LIKE '%$al_id%'";
+                                                    $query_run7 = mysqli_query($con, $query7);
+                                                    $allexpertise = "";
+                                                    foreach($query_run7 as $expitems){
+                                                        $allexpertise .= ", " . $expitems['club'];
+                                                    }
+                                                    $allexpertise = substr($allexpertise,1);
+                                                    
+    
+                                                    $query8 = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$al_id%'";
+                                                    $query_run8 = mysqli_query($con, $query8);
+                                                    $allhobby = "";
+                                                    foreach($query_run8 as $hobbyitems){
+                                                        $allhobby .= ", " . $hobbyitems['hobby'];
+                                                    }
+                                                    $allhobby = substr($allhobby,1);
+    
+    
+                                                    $query9 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$al_id%'";
+                                                    $query_run9 = mysqli_query($con, $query9);
+                                                    $fieldofinterest = "";
+                                                    foreach($query_run9 as $interestitems){
+                                                        $fieldofinterest .= ", " . $interestitems['field_of_interest'];
+                                                    }
+                                                    $fieldofinterest = substr($fieldofinterest,1);
+    
+    
+                                                    
+    
+                                                    $expquery2 = "SELECT * FROM student WHERE CONCAT(name,department,school,college,hometown,email,id) LIKE '%$al_id%'";
+                                                    $expquery_run2 = mysqli_query($con, $expquery2);
+    
+                                                    foreach($expquery_run2 as $expitems2){
+                                                        ?>
+                                                    <tr>
+                                                        <td><?= $expitems2['name']; ?></td>
+                                                        <td><?= $expitems2['department']; ?></td>
+                                                        <td><?= $expitems2['school']; ?></td>
+                                                        <td><?= $expitems2['college']; ?></td>
+                                                        <td><?= $expitems2['hometown']; ?></td>
+                                                        
+                                                        <td><?= $allhobby; ?></td>
+                                                        <td><?= $fieldofinterest; ?></td>
+    
+                                                        <td><?= $allexpertise; ?></td>
+                                                        <td><?= $expitems2['email']; ?></td>
+    
+                                                      
+                                                        </tr>
+                                                    <?php
+                                                    }
+    
+                                                }
+                                                   
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                                    <tr>
+                                                        <td colspan="4">No Record Found</td>
+                                                    </tr>
+                                                <?php
+                                            }
+                                            }
                                         }
+
+
+
                                         else
                                         {
                                             ?>
@@ -468,6 +544,7 @@
                                             }
                                                
                                         }
+
                                         else
                                         {
                                             ?>
