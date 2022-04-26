@@ -3,12 +3,20 @@
 $mysqli = new mysqli('localhost', 'root', '', 'bracu_mates') or die(mysqli_error($mysqli));
 
 
+/* Handle error messages during failed login */
+
+function manage_error_message()
+{
+    echo "<alert>Login Failed, Please Register First</alert>";
+}
+
 /* REGISTRATION AND LOGIN SECTION */
 
 // Student Registration
 
 if (isset($_POST['register_student'])) {
     $name = $_POST['name'];
+    $id = $_POST['id'];
     $school = $_POST['school'];
     $college = $_POST['college'];
     $hometown = $_POST['hometown'];
@@ -34,7 +42,7 @@ if (isset($_POST['register_student'])) {
 
         if (mysqli_num_rows($result) >= 1) {
         } else {
-            $mysqli->query("INSERT INTO student(name, school, college, email, hometown, blood_group, linkedin, department, dob, current_location, credits_completed, password) VALUES('$name','$school','$college', '$email', '$hometown', '$blood_group', '$linkedin', '$department', '$dob', '$current_location', '$credits_completed', '$password')") or die($mysqli->error);
+            $mysqli->query("INSERT INTO student(name, id, school, college, email, hometown, blood_group, linkedin, department, dob, current_location, credits_completed, password) VALUES('$name', '$id', '$school','$college', '$email', '$hometown', '$blood_group', '$linkedin', '$department', '$dob', '$current_location', '$credits_completed', '$password')") or die($mysqli->error);
 
             $sql = "SELECT id FROM `student` WHERE `email` LIKE '$email'";
             $result = $mysqli->query($sql);
@@ -53,6 +61,8 @@ if (isset($_POST['register_student'])) {
                 $mysqli->query("INSERT INTO `student_hobby` (`s_id`, `hobby`) VALUES ('$student_id','$hobby');");
             }
         }
+    } else {
+        header("Location: registration.php");
     }
 }
 
@@ -79,7 +89,6 @@ if (isset($_POST['login_student'])) {
 }
 
 
-
 // Donor Registration
 if (isset($_POST['register_donor'])) {
     $name = $_POST['name'];
@@ -97,7 +106,11 @@ if (isset($_POST['register_donor'])) {
     $sql = "SELECT * FROM donor WHERE  email='$email'";
     $result = $mysqli->query($sql);
     $row = $result->fetch_assoc();
-    if ($result) {
+
+    $today = date("Y-m-d");
+    $age = date_diff(date_create($dob), date_create($today));
+
+    if ($weight >= 40 and $age and $result) {
 
         if (mysqli_num_rows($result) >= 1) {
         } else {
@@ -116,7 +129,10 @@ if (isset($_POST['register_donor'])) {
             foreach ($health_conditions as $health_condition) {
                 $mysqli->query("INSERT INTO `donor_health_condition` (`d_id`, `health_condition`) VALUES ('$donor_id','$health_condition');");
             }
+            header("Location: donor_login.php");
         }
+    } else {
+        header("Location: donor_registration.php");
     }
 }
 
@@ -173,6 +189,8 @@ if (isset($_POST['register_alumni'])) {
                 $mysqli->query("INSERT INTO `alumni_area_of_expertise` (`al_id`, `expertise`) VALUES ('$alumni_id','$expertise');");
             }
         }
+    } else {
+        header("Location: alumni_registration.php");
     }
 }
 
@@ -192,7 +210,7 @@ if (isset($_POST['login_alumni'])) {
             header("Location: alumni_profile.php");
             exit();
         } else {
-            echo "FAIL";
+            header("Location: alumni_registration.php");
         }
     }
 }
@@ -204,5 +222,18 @@ if (isset($_POST['post_student_question'])) {
     $question = $_POST['question'];
     if ($question != "") {
         $mysqli->query("INSERT INTO faq(question, answer) VALUES('$question', '-')");
+    }
+}
+
+/* LOST & FOUND SECTION*/
+
+// handle posting found item report
+if (isset($_POST['post_lost_and_found_report'])) {
+    $item_name = $_POST['item_name'];
+    $reporter_email = $_POST['reporter_email'];
+    $place = $_POST['place'];
+    $report_date = $_POST['report_date'];
+    if ($item_name != "") {
+        $mysqli->query("INSERT INTO lost_and_found(reporter_email, item_name, report_date, place) VALUES('$report_date', '$item_name', '$place', '$report_date')");
     }
 }
