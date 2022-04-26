@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2022 at 12:40 AM
+-- Generation Time: Apr 26, 2022 at 03:53 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -44,7 +44,6 @@ CREATE TABLE `alumni` (
 
 INSERT INTO `alumni` (`id`, `Name`, `company`, `graduation_date`, `department`, `email`, `linkedin`, `password`) VALUES
 (77, 'Shafin Khandaker', 'Google', '2022-04-01', 'CSE', 'shafin@gmail.com', 'Shafin-Linkedin', 'shafin123'),
-(78, '', '', '0000-00-00', '', '', '', ''),
 (79, 'dasdas', 'dada', '2022-04-07', 'cas', 'dasasfqwff', 'das', 'ss'),
 (80, 'dasdas', 'dada', '2022-04-07', 'cas', 'dasasfqwwwdff', 'das', 'dasdas');
 
@@ -97,7 +96,9 @@ CREATE TABLE `donor` (
 
 INSERT INTO `donor` (`id`, `name`, `phone`, `email`, `dob`, `blood_group`, `last_donation`, `weight`, `password`) VALUES
 (2, 'Showmick Kar', '013424234', 'showmick12@gmail.com', '2022-04-04', 'AB+', '2022-04-21', '45', '2121'),
-(3, 'Showmick Kar', '+8801776365131', 'showmick.kar@g.bracu.ac.bd', '2022-04-07', 'AB+', '2022-04-06', '45', '1111');
+(3, 'Showmick Kar', '+8801776365131', 'showmick.kar@g.bracu.ac.bd', '2022-04-07', 'AB+', '2022-04-06', '45', '1111'),
+(4, 'Ifty', '931321', 'dasdasd@', '1966-10-14', 'adas', '2022-04-21', '53', '2121'),
+(5, 'Ifty', '931321', 'dasdasd@dasda', '1966-10-14', 'adas', '2022-04-21', '53', '2121');
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,11 @@ CREATE TABLE `donor_available_location` (
 
 INSERT INTO `donor_available_location` (`d_id`, `location`) VALUES
 (3, 'Mohakhali'),
-(3, 'Dhanmondi');
+(3, 'Dhanmondi'),
+(4, 'Mohakhali'),
+(4, 'Mohammadpur'),
+(5, 'Mohakhali'),
+(5, 'Mohammadpur');
 
 -- --------------------------------------------------------
 
@@ -137,7 +142,11 @@ INSERT INTO `donor_health_condition` (`d_id`, `health_condition`) VALUES
 (2, 'Heart Diseases'),
 (2, 'Kidney Diseases'),
 (3, 'Kidney Diseases'),
-(3, 'Covid Vaccinated');
+(3, 'Covid Vaccinated'),
+(4, 'Heart Diseases'),
+(4, 'Kidney Diseases'),
+(5, 'Heart Diseases'),
+(5, 'Kidney Diseases');
 
 -- --------------------------------------------------------
 
@@ -156,17 +165,34 @@ CREATE TABLE `faq` (
 --
 
 INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
-(9, 'Q1', 'A1'),
-(10, 'Q2', 'A2'),
-(11, 'Q3', 'A4'),
-(13, 'Hello', '-'),
-(14, 'asdasdas', 'answer'),
-(15, 'dada', 'answer'),
-(16, 'dada', '-'),
-(17, 'dasdasdas', '-'),
-(18, 'dada', '-'),
-(19, 'What is a Dog?', 'It\'s an animal'),
-(20, 'Hello Kittly!', 'You question has been answered');
+(44, 'Where to collect my ID card?', 'UB70405'),
+(45, 'Where is the Library?', 'UB20402'),
+(46, 'What is a dog?', 'an animal'),
+(47, 'What is a dog?', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lost_and_found`
+--
+
+CREATE TABLE `lost_and_found` (
+  `id` int(11) NOT NULL,
+  `reporter_email` varchar(100) NOT NULL,
+  `item_name` varchar(100) NOT NULL,
+  `report_date` date NOT NULL,
+  `place` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lost_and_found`
+--
+
+INSERT INTO `lost_and_found` (`id`, `reporter_email`, `item_name`, `report_date`, `place`) VALUES
+(1, 'shaodhao@mjosad', 'paper', '2022-04-19', 'cumila'),
+(2, 'dasndi@', 'dasdas', '2022-04-19', 'dasdas'),
+(3, '2022-04-18', 'Pen', '0000-00-00', '2022-04-18'),
+(4, '2022-04-25', 'Paper', '0000-00-00', '2022-04-25');
 
 -- --------------------------------------------------------
 
@@ -198,7 +224,8 @@ INSERT INTO `student` (`id`, `name`, `school`, `college`, `email`, `hometown`, `
 (1, 'asdasd', 'dasda', 'das', 'dasdas', 'das', '', 'dasdas', 'dasdas', '2022-04-07', 'das', 1212, 'dasda'),
 (2, 'Maidul Islam', 'dasdas', 'sdasda', 'dasdasafgeref', 'asdas', '', 'asdas', 'dad', '2022-04-08', 'dasdas', 1212, 'dasda'),
 (3, 'Maidul Islam', 'dasdas aasda', 'sdasda sadasd', 'asidnis7bd', 'asdas', '', 'asdas', 'dad', '2022-04-08', 'dasdas', 1212, 'dsaa'),
-(4, 'Maidul Islam', 'Pabna Zilla School', 'Pabna Govt. Edward University College', 'maidul@gmail.com', 'Pabna', 'AB+', 'https://www.linkedin.com/in/showmick-kar/', 'CSE', '2022-03-30', 'Mohakhali', 54, '2121');
+(4, 'Maidul Islam', 'Pabna Zilla School', 'Pabna Govt. Edward University College', 'maidul@gmail.com', 'Pabna', 'AB+', 'https://www.linkedin.com/in/showmick-kar/', 'CSE', '2022-03-30', 'Mohakhali', 54, '2121'),
+(20301177, 'Shupta', 'dadas', 'fafas', 'asdfasd2378rh', 'das', 'AB+', 'dad', 'dad', '2022-04-05', 'dasdas', 1212, '2121');
 
 -- --------------------------------------------------------
 
@@ -222,7 +249,9 @@ INSERT INTO `student_club` (`s_id`, `club`) VALUES
 (2, 'Robotics Club Of BRAC University'),
 (3, 'BRAC University Cultural Club'),
 (3, 'Robotics Club Of BRAC University'),
-(4, 'Robotics Club Of BRAC University');
+(4, 'Robotics Club Of BRAC University'),
+(20301177, 'BRAC University Cultural Club'),
+(20301177, 'Robotics Club Of BRAC University');
 
 -- --------------------------------------------------------
 
@@ -247,7 +276,9 @@ INSERT INTO `student_field_of_interest` (`s_id`, `field_of_interest`) VALUES
 (3, 'Machine Learning'),
 (3, 'Frontend Engineering'),
 (4, 'Machine Learning'),
-(4, 'Backend Engineering');
+(4, 'Backend Engineering'),
+(20301177, 'Machine Learning'),
+(20301177, 'Frontend Engineering');
 
 -- --------------------------------------------------------
 
@@ -273,7 +304,9 @@ INSERT INTO `student_hobby` (`s_id`, `hobby`) VALUES
 (3, 'Music'),
 (3, 'Coin Collection'),
 (4, 'Music'),
-(4, 'Photography');
+(4, 'Photography'),
+(20301177, 'Music'),
+(20301177, 'Gardening');
 
 --
 -- Indexes for dumped tables
@@ -316,6 +349,12 @@ ALTER TABLE `faq`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `lost_and_found`
+--
+ALTER TABLE `lost_and_found`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
@@ -353,18 +392,18 @@ ALTER TABLE `alumni`
 -- AUTO_INCREMENT for table `donor`
 --
 ALTER TABLE `donor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT for table `student`
+-- AUTO_INCREMENT for table `lost_and_found`
 --
-ALTER TABLE `student`
+ALTER TABLE `lost_and_found`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
