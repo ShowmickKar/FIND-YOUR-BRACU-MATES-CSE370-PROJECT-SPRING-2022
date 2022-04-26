@@ -279,12 +279,24 @@
                                                 echo $allexpertise;
 
                                                 $query4 = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$al_id%'";
-                                                $query_run4 = mysqli_query($con, $query3);
+                                                $query_run4 = mysqli_query($con, $query4);
                                                 $allhobby = "";
                                                 foreach($query_run4 as $hobbyitems){
                                                     $allhobby .= ", " . $hobbyitems['hobby'];
                                                 }
                                                 $allhobby = substr($allhobby,1);
+
+
+                                                $query5 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$al_id%'";
+                                                $query_run5 = mysqli_query($con, $query5);
+                                                $fieldofinterest = "";
+                                                foreach($query_run5 as $interestitems){
+                                                    $fieldofinterest .= ", " . $interestitems['field_of_interest'];
+                                                }
+                                                $fieldofinterest = substr($fieldofinterest,1);
+
+
+                                                
 
                                                 $expquery2 = "SELECT * FROM student WHERE CONCAT(name,department,school,college,hometown,email,id) LIKE '%$al_id%'";
                                                 $expquery_run2 = mysqli_query($con, $expquery2);
@@ -299,7 +311,7 @@
                                                     <td><?= $expitems2['hometown']; ?></td>
                                                     
                                                     <td><?= $allhobby; ?></td>
-                                                                                                        <td><?= $expitems2['hometown']; ?></td>
+                                                    <td><?= $fieldofinterest; ?></td>
 
                                                     <td><?= $allexpertise; ?></td>
                                                     <td><?= $expitems2['email']; ?></td>
