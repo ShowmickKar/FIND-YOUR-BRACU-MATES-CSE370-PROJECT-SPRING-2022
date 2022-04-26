@@ -13,9 +13,7 @@
 <body>
     <?php require_once 'process.php'; ?>
     <h1><b><u>Alumni Registration</u></b></h1>
-    <div class="alert alert-danger" role="alert">
-        User already exists!
-    </div>
+
     <p>Fill up the form to complete your registration</p><br>
     <div>
         <form action="process.php" method="POST">
