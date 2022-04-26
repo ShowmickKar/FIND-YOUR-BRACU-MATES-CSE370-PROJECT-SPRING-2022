@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h1 class='text-center mt-4'>THIS IS DONOR PROFILE PAGE</h1>
+    <h1 class='text-center mt-4'>THIS IS STUDENT PROFILE PAGE</h1>
     <!-- <nav>
         <ul>
             <li><a href="index.php">logout</a></li>
