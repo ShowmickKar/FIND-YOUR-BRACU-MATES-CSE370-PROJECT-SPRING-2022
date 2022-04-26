@@ -3,7 +3,7 @@
 $mysqli = new mysqli('localhost', 'root', '', 'bracu_mates') or die(mysqli_error($mysqli));
 
 
-/* Handle error messages during failed login */
+/* Handle error messages during failed login (!!! Deprecated !!!)*/
 
 // function manage_error_message()
 // {
@@ -60,9 +60,10 @@ if (isset($_POST['register_student'])) {
             foreach ($hobbies as $hobby) {
                 $mysqli->query("INSERT INTO `student_hobby` (`s_id`, `hobby`) VALUES ('$student_id','$hobby');");
             }
+            header("Location: student_login.php");
         }
     } else {
-        header("Location: registration.php");
+        header("Location: student_registration.php");
     }
 }
 
