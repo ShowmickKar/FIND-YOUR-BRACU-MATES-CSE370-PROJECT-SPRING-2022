@@ -29,6 +29,9 @@
             <div class="form-group">
                 <button type="submit" name="login_donor" class="btn btn-primary">Login</button>
             </div>
+            <div class="form-group">
+                <a href="donor_registration.php">Don't have an account?</a>
+            </div>
         </form>
     </div>
 </body>
