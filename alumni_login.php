@@ -29,6 +29,9 @@
             <div class="form-group">
                 <button type="submit" name="login_alumni" class="btn btn-primary">Login</button>
             </div>
+            <div class="form-group">
+                <a href="alumni_registration.php">Don't have an account?</a>
+            </div>
         </form>
     </div>
 </body>
