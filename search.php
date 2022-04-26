@@ -276,7 +276,7 @@
                                                     $allexpertise .= ", " . $expitems['club'];
                                                 }
                                                 $allexpertise = substr($allexpertise,1);
-                                                echo $allexpertise;
+                                            
 
                                                 $query4 = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$al_id%'";
                                                 $query_run4 = mysqli_query($con, $query4);
