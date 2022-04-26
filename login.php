@@ -11,9 +11,9 @@
 </head>
 
 <body>
-    <h1>This is Login Page</h1>
+    <h1 class='text-center mt-4'>This is Login Page</h1>
     <div>
-        <ul>
+        <!-- <ul>
             <li><a href="student_login.php">Login as Student</a></li>
         </ul>
         <ul>
@@ -21,7 +21,12 @@
         </ul>
         <ul>
             <li><a href="donor_login.php">Login as Donor</a></li>
-        </ul>
+        </ul> -->
+        <div class='text-center p-4'>
+        <a href="student_login.php" class="btn btn-primary mb-4">Login as Student</a> </br>
+        <a href="alumni_login.php" class="btn btn-success mb-4">Login as Alumni</a></br>
+        <a href="donor_login.php" class="btn btn-primary ">Login as Donor</a>
+    </div>
     </div>
 </body>
 
