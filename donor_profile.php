@@ -11,13 +11,20 @@
 </head>
 
 <body>
-    <h1>THIS IS DONOR PROFILE PAGE</h1>
-    <nav>
+    <h1 class='text-center mt-4'>THIS IS DONOR PROFILE PAGE</h1>
+    <!-- <nav>
         <ul>
-            <li><a href="homepage.php">logout</a></li>
+            <li><a href="index.php">logout</a></li>
             <li><a href="faq.php">Frequently Asked Questions</a></li>
         </ul>
-    </nav>
+    </nav> -->
+    <div class='text-center p-4'>
+        <a href="search.php" class="btn btn-primary mb-4">Search</a></br>
+        <a href="faq.php" class="btn btn-success mb-4">Frequently Asked Questions</a></br>
+        <a href="index.php" class="btn btn-primary mb-4">Logout</a> 
+        
+        
+    </div>
 </body>
 
 </html>
