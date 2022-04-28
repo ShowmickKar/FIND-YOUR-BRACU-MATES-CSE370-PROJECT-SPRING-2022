@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Funda Of Web IT</title>
 </head>
+
 <body>
 
     <div class="container">
@@ -23,7 +25,9 @@
 
                                 <form action="" method="GET">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="searchAlumni" required value="<?php if(isset($_GET['searchAlumni'])){echo $_GET['searchAlumni']; } ?>" class="form-control" placeholder="Search data">
+                                        <input type="text" name="searchAlumni" required value="<?php if (isset($_GET['searchAlumni'])) {
+                                                                                                    echo $_GET['searchAlumni'];
+                                                                                                } ?>" class="form-control" placeholder="Search data">
                                         <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </form>
@@ -49,101 +53,86 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $con = mysqli_connect("localhost","root","","bracu_mates");
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "bracu_mates");
 
-                                    if(isset($_GET['searchAlumni']))
-                                    {
-                                        $filtervalues = $_GET['searchAlumni'];
-                                        $query = "SELECT * FROM alumni WHERE CONCAT(Name,company,email,linkedin,id) LIKE '%$filtervalues%'";
-                                        $query_run = mysqli_query($con, $query);
+                                if (isset($_GET['searchAlumni'])) {
+                                    $filtervalues = $_GET['searchAlumni'];
+                                    $query = "SELECT * FROM alumni WHERE CONCAT(Name,company,email,linkedin,id) LIKE '%$filtervalues%'";
+                                    $query_run = mysqli_query($con, $query);
 
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $items)
-                                            {
-                                                $expertise = $items['id'];
-                                                $allexpertise = "";
+                                    if (mysqli_num_rows($query_run) > 0) {
+                                        foreach ($query_run as $items) {
+                                            $expertise = $items['id'];
+                                            $allexpertise = "";
 
-                                                $expquery = "SELECT * FROM alumni_area_of_expertise WHERE CONCAT(al_id,expertise) LIKE '%$expertise%'";
-                                                $expquery_run = mysqli_query($con, $expquery);
-                                                foreach($expquery_run as $expitems){
+                                            $expquery = "SELECT * FROM alumni_area_of_expertise WHERE CONCAT(al_id,expertise) LIKE '%$expertise%'";
+                                            $expquery_run = mysqli_query($con, $expquery);
+                                            foreach ($expquery_run as $expitems) {
 
-                                                    $allexpertise .= ", " . $expitems['expertise'];
-                                                    // 
-                                                }
-                                                $allexpertise = substr($allexpertise,1);
-                                                ?>
-                                                <tr>
-                                                    <td><?= $items['Name']; ?></td>
-                                                    <td><?= $items['company']; ?></td>
-                                                    <td><?= $items['email']; ?></td>
-                                                    <td><?= $items['linkedin']; ?></td>
-                                                    <td><?= $allexpertise; ?></td>
-                                                    </tr>
-                                                <?php
-                                                
+                                                $allexpertise .= ", " . $expitems['expertise'];
+                                                // 
                                             }
-                                        }
+                                            $allexpertise = substr($allexpertise, 1);
+                                ?>
+                                            <tr>
+                                                <td><?= $items['Name']; ?></td>
+                                                <td><?= $items['company']; ?></td>
+                                                <td><?= $items['email']; ?></td>
+                                                <td><?= $items['linkedin']; ?></td>
+                                                <td><?= $allexpertise; ?></td>
+                                            </tr>
+                                            <?php
 
-                                        elseif(mysqli_num_rows($query_run) <= 0)
-                                        {
-                                            $query2 = "SELECT * FROM alumni_area_of_expertise WHERE CONCAT(al_id, expertise) LIKE '%$filtervalues%'";
-                                            $query_run2 = mysqli_query($con, $query2);
-                                            if(mysqli_num_rows($query_run2) > 0)
-                                        {   
-                                            foreach($query_run2 as $items){
+                                        }
+                                    } elseif (mysqli_num_rows($query_run) <= 0) {
+                                        $query2 = "SELECT * FROM alumni_area_of_expertise WHERE CONCAT(al_id, expertise) LIKE '%$filtervalues%'";
+                                        $query_run2 = mysqli_query($con, $query2);
+                                        if (mysqli_num_rows($query_run2) > 0) {
+                                            foreach ($query_run2 as $items) {
                                                 $al_id = $items['al_id'];
                                                 $query3 = "SELECT * FROM alumni_area_of_expertise WHERE CONCAT(al_id, expertise) LIKE '%$al_id%'";
                                                 $query_run3 = mysqli_query($con, $query3);
                                                 $allexpertise = "";
 
 
-                                                foreach($query_run3 as $expitems){
+                                                foreach ($query_run3 as $expitems) {
 
                                                     $allexpertise .= ", " . $expitems['expertise'];
                                                     // 
                                                 }
-                                                $allexpertise = substr($allexpertise,1);
+                                                $allexpertise = substr($allexpertise, 1);
 
                                                 $expquery2 = "SELECT * FROM alumni WHERE CONCAT(Name,company,email,linkedin,id) LIKE '%$al_id%'";
                                                 $expquery_run2 = mysqli_query($con, $expquery2);
 
-                                                foreach($expquery_run2 as $expitems2){
-                                                    ?>
+                                                foreach ($expquery_run2 as $expitems2) {
+                                            ?>
                                                     <tr>
                                                         <td><?= $expitems2['Name']; ?></td>
                                                         <td><?= $expitems2['company']; ?></td>
                                                         <td><?= $expitems2['email']; ?></td>
                                                         <td><?= $expitems2['linkedin']; ?></td>
                                                         <td><?= $allexpertise; ?></td>
-                                                        </tr>
-                                                    <?php
+                                                    </tr>
+                                            <?php
                                                 }
-
                                             }
-                                               
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             ?>
-                                                <tr>
-                                                    <td colspan="4">No Record Found</td>
-                                                </tr>
-                                            <?php
+                                            <tr>
+                                                <td colspan="4">No Record Found</td>
+                                            </tr>
+                                        <?php
                                         }
-                                        }
-
-
-                                        else
-                                        {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="4">No Record Found</td>
-                                                </tr>
-                                            <?php
-                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="4">No Record Found</td>
+                                        </tr>
+                                <?php
                                     }
+                                }
                                 ?>
                             </tbody>
                         </table>
@@ -172,7 +161,9 @@
 
                                 <form action="" method="GET">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="searchStudent" required value="<?php if(isset($_GET['searchStudent'])){echo $_GET['searchStudent']; } ?>" class="form-control" placeholder="Search data">
+                                        <input type="text" name="searchStudent" required value="<?php if (isset($_GET['searchStudent'])) {
+                                                                                                    echo $_GET['searchStudent'];
+                                                                                                } ?>" class="form-control" placeholder="Search data">
                                         <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </form>
@@ -198,228 +189,205 @@
                                     <th>Field of interest</th>
                                     <th>Clubs</th>
                                     <th>Email</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $con = mysqli_connect("localhost","root","","bracu_mates");
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "bracu_mates");
 
-                                    if(isset($_GET['searchStudent']))
-                                    {
-                                        $filtervalues = $_GET['searchStudent'];
-                                        $query = "SELECT * FROM student WHERE CONCAT(name,department,school,college,hometown,email) LIKE '%$filtervalues%'";
-                                        $query_run = mysqli_query($con, $query);
+                                if (isset($_GET['searchStudent'])) {
+                                    $filtervalues = $_GET['searchStudent'];
+                                    $query = "SELECT * FROM student WHERE CONCAT(name,department,school,college,hometown,email) LIKE '%$filtervalues%'";
+                                    $query_run = mysqli_query($con, $query);
 
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $items)
-                                            {
-                                                $expertise = $items['id'];
-                                                $allexpertise = "";
+                                    if (mysqli_num_rows($query_run) > 0) {
+                                        foreach ($query_run as $items) {
+                                            $expertise = $items['id'];
+                                            $allexpertise = "";
 
-                                                $expquery = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$expertise%'";
-                                                $expquery_run = mysqli_query($con, $expquery);
-                                                foreach($expquery_run as $expitems){
-                                                    $allexpertise .= ", " . $expitems['hobby'];
-                                                }
-                                                $allexpertise = substr($allexpertise,1);
-
-
-                                                $interest = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$expertise%'";
-                                                $interest_run = mysqli_query($con, $interest);
-                                                $allinterest = "";
-                                                foreach($interest_run as $intitems){
-                                                    $allinterest .= ", " . $intitems['field_of_interest'];
-                                                }
-                                                $allinterest = substr($allinterest,1);
-
-
-                                                $clubs = "SELECT * FROM student_club WHERE CONCAT(s_id,club) LIKE '%$expertise%'";
-                                                $clubs_run = mysqli_query($con, $clubs);
-                                                $allclubs = "";
-                                                foreach($clubs_run as $clubitems){
-                                                    $allclubs .= ", " . $clubitems['club'];
-                                                }
-                                                $allclubs = substr($allclubs,1);
-
-                                                ?>
-                                                <tr>
-                                                    <td><?= $items['name']; ?></td>
-                                                    <td><?= $items['department']; ?></td>
-                                                    <td><?= $items['school']; ?></td>
-                                                    <td><?= $items['college']; ?></td>
-                                                    <td><?= $items['hometown']; ?></td>
-                                                    <td><?= $allexpertise; ?></td>
-                                                    <td><?= $allinterest; ?></td>
-                                                    <td><?= $allclubs; ?></td>  
-                                                    <td><?= $items['email']; ?></td>                                                  
-                                                  
-                                                    </tr>
-                                                <?php
-                                                
+                                            $expquery = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$expertise%'";
+                                            $expquery_run = mysqli_query($con, $expquery);
+                                            foreach ($expquery_run as $expitems) {
+                                                $allexpertise .= ", " . $expitems['hobby'];
                                             }
-                                        }
+                                            $allexpertise = substr($allexpertise, 1);
 
-                                        elseif(mysqli_num_rows($query_run) <= 0)//here
-                                        {
-                                            $query2 = "SELECT * FROM student_club WHERE CONCAT(s_id,club) LIKE '%$filtervalues%'";
-                                            $query_run2 = mysqli_query($con, $query2);
-                                            if(mysqli_num_rows($query_run2) > 0)
-                                        {   
-                                            foreach($query_run2 as $items){
+
+                                            $interest = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$expertise%'";
+                                            $interest_run = mysqli_query($con, $interest);
+                                            $allinterest = "";
+                                            foreach ($interest_run as $intitems) {
+                                                $allinterest .= ", " . $intitems['field_of_interest'];
+                                            }
+                                            $allinterest = substr($allinterest, 1);
+
+
+                                            $clubs = "SELECT * FROM student_club WHERE CONCAT(s_id,club) LIKE '%$expertise%'";
+                                            $clubs_run = mysqli_query($con, $clubs);
+                                            $allclubs = "";
+                                            foreach ($clubs_run as $clubitems) {
+                                                $allclubs .= ", " . $clubitems['club'];
+                                            }
+                                            $allclubs = substr($allclubs, 1);
+
+                                ?>
+                                            <tr>
+                                                <td><?= $items['name']; ?></td>
+                                                <td><?= $items['department']; ?></td>
+                                                <td><?= $items['school']; ?></td>
+                                                <td><?= $items['college']; ?></td>
+                                                <td><?= $items['hometown']; ?></td>
+                                                <td><?= $allexpertise; ?></td>
+                                                <td><?= $allinterest; ?></td>
+                                                <td><?= $allclubs; ?></td>
+                                                <td><?= $items['email']; ?></td>
+
+                                            </tr>
+                                            <?php
+
+                                        }
+                                    } elseif (mysqli_num_rows($query_run) <= 0) //here
+                                    {
+                                        $query2 = "SELECT * FROM student_club WHERE CONCAT(s_id,club) LIKE '%$filtervalues%'";
+                                        $query_run2 = mysqli_query($con, $query2);
+                                        if (mysqli_num_rows($query_run2) > 0) {
+                                            foreach ($query_run2 as $items) {
                                                 $al_id = $items['s_id'];
                                                 $query3 = "SELECT * FROM student_club WHERE CONCAT(s_id, club) LIKE '%$al_id%'";
                                                 $query_run3 = mysqli_query($con, $query3);
                                                 $allexpertise = "";
-                                                foreach($query_run3 as $expitems){
+                                                foreach ($query_run3 as $expitems) {
                                                     $allexpertise .= ", " . $expitems['club'];
                                                 }
-                                                $allexpertise = substr($allexpertise,1);
-                                            
+                                                $allexpertise = substr($allexpertise, 1);
+
 
                                                 $query4 = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$al_id%'";
                                                 $query_run4 = mysqli_query($con, $query4);
                                                 $allhobby = "";
-                                                foreach($query_run4 as $hobbyitems){
+                                                foreach ($query_run4 as $hobbyitems) {
                                                     $allhobby .= ", " . $hobbyitems['hobby'];
                                                 }
-                                                $allhobby = substr($allhobby,1);
+                                                $allhobby = substr($allhobby, 1);
 
 
                                                 $query5 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$al_id%'";
                                                 $query_run5 = mysqli_query($con, $query5);
                                                 $fieldofinterest = "";
-                                                foreach($query_run5 as $interestitems){
+                                                foreach ($query_run5 as $interestitems) {
                                                     $fieldofinterest .= ", " . $interestitems['field_of_interest'];
                                                 }
-                                                $fieldofinterest = substr($fieldofinterest,1);
+                                                $fieldofinterest = substr($fieldofinterest, 1);
 
 
-                                                
+
 
                                                 $expquery2 = "SELECT * FROM student WHERE CONCAT(name,department,school,college,hometown,email,id) LIKE '%$al_id%'";
                                                 $expquery_run2 = mysqli_query($con, $expquery2);
 
-                                                foreach($expquery_run2 as $expitems2){
-                                                    ?>
-                                                <tr>
-                                                    <td><?= $expitems2['name']; ?></td>
-                                                    <td><?= $expitems2['department']; ?></td>
-                                                    <td><?= $expitems2['school']; ?></td>
-                                                    <td><?= $expitems2['college']; ?></td>
-                                                    <td><?= $expitems2['hometown']; ?></td>
-                                                    
-                                                    <td><?= $allhobby; ?></td>
-                                                    <td><?= $fieldofinterest; ?></td>
-
-                                                    <td><?= $allexpertise; ?></td>
-                                                    <td><?= $expitems2['email']; ?></td>
-
-                                                  
-                                                    </tr>
-                                                <?php
-                                                }
-
-                                            }
-                                               
-                                        }//new code starts here
-                                        elseif(mysqli_num_rows($query_run2) <= 0){
-                                            {
-                                                $query6 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$filtervalues%'";
-                                                $query_run6 = mysqli_query($con, $query6);
-                                                if(mysqli_num_rows($query_run6) > 0)
-                                            {   
-                                                foreach($query_run6 as $items){
-                                                    $al_id = $items['s_id'];
-                                                    $query7 = "SELECT * FROM student_club WHERE CONCAT(s_id, club) LIKE '%$al_id%'";
-                                                    $query_run7 = mysqli_query($con, $query7);
-                                                    $allexpertise = "";
-                                                    foreach($query_run7 as $expitems){
-                                                        $allexpertise .= ", " . $expitems['club'];
-                                                    }
-                                                    $allexpertise = substr($allexpertise,1);
-                                                    
-    
-                                                    $query8 = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$al_id%'";
-                                                    $query_run8 = mysqli_query($con, $query8);
-                                                    $allhobby = "";
-                                                    foreach($query_run8 as $hobbyitems){
-                                                        $allhobby .= ", " . $hobbyitems['hobby'];
-                                                    }
-                                                    $allhobby = substr($allhobby,1);
-    
-    
-                                                    $query9 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$al_id%'";
-                                                    $query_run9 = mysqli_query($con, $query9);
-                                                    $fieldofinterest = "";
-                                                    foreach($query_run9 as $interestitems){
-                                                        $fieldofinterest .= ", " . $interestitems['field_of_interest'];
-                                                    }
-                                                    $fieldofinterest = substr($fieldofinterest,1);
-    
-    
-                                                    
-    
-                                                    $expquery2 = "SELECT * FROM student WHERE CONCAT(name,department,school,college,hometown,email,id) LIKE '%$al_id%'";
-                                                    $expquery_run2 = mysqli_query($con, $expquery2);
-    
-                                                    foreach($expquery_run2 as $expitems2){
-                                                        ?>
+                                                foreach ($expquery_run2 as $expitems2) {
+                                            ?>
                                                     <tr>
                                                         <td><?= $expitems2['name']; ?></td>
                                                         <td><?= $expitems2['department']; ?></td>
                                                         <td><?= $expitems2['school']; ?></td>
                                                         <td><?= $expitems2['college']; ?></td>
                                                         <td><?= $expitems2['hometown']; ?></td>
-                                                        
+
                                                         <td><?= $allhobby; ?></td>
                                                         <td><?= $fieldofinterest; ?></td>
-    
+
                                                         <td><?= $allexpertise; ?></td>
                                                         <td><?= $expitems2['email']; ?></td>
-    
-                                                      
-                                                        </tr>
+
+
+                                                    </tr>
                                                     <?php
-                                                    }
-    
                                                 }
-                                                   
                                             }
-                                            else
-                                            {
-                                                ?>
+                                        } //new code starts here
+                                        elseif (mysqli_num_rows($query_run2) <= 0) { {
+                                                $query6 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$filtervalues%'";
+                                                $query_run6 = mysqli_query($con, $query6);
+                                                if (mysqli_num_rows($query_run6) > 0) {
+                                                    foreach ($query_run6 as $items) {
+                                                        $al_id = $items['s_id'];
+                                                        $query7 = "SELECT * FROM student_club WHERE CONCAT(s_id, club) LIKE '%$al_id%'";
+                                                        $query_run7 = mysqli_query($con, $query7);
+                                                        $allexpertise = "";
+                                                        foreach ($query_run7 as $expitems) {
+                                                            $allexpertise .= ", " . $expitems['club'];
+                                                        }
+                                                        $allexpertise = substr($allexpertise, 1);
+
+
+                                                        $query8 = "SELECT * FROM student_hobby WHERE CONCAT(s_id,hobby) LIKE '%$al_id%'";
+                                                        $query_run8 = mysqli_query($con, $query8);
+                                                        $allhobby = "";
+                                                        foreach ($query_run8 as $hobbyitems) {
+                                                            $allhobby .= ", " . $hobbyitems['hobby'];
+                                                        }
+                                                        $allhobby = substr($allhobby, 1);
+
+
+                                                        $query9 = "SELECT * FROM student_field_of_interest WHERE CONCAT(s_id,field_of_interest) LIKE '%$al_id%'";
+                                                        $query_run9 = mysqli_query($con, $query9);
+                                                        $fieldofinterest = "";
+                                                        foreach ($query_run9 as $interestitems) {
+                                                            $fieldofinterest .= ", " . $interestitems['field_of_interest'];
+                                                        }
+                                                        $fieldofinterest = substr($fieldofinterest, 1);
+
+
+
+
+                                                        $expquery2 = "SELECT * FROM student WHERE CONCAT(name,department,school,college,hometown,email,id) LIKE '%$al_id%'";
+                                                        $expquery_run2 = mysqli_query($con, $expquery2);
+
+                                                        foreach ($expquery_run2 as $expitems2) {
+                                                    ?>
+                                                            <tr>
+                                                                <td><?= $expitems2['name']; ?></td>
+                                                                <td><?= $expitems2['department']; ?></td>
+                                                                <td><?= $expitems2['school']; ?></td>
+                                                                <td><?= $expitems2['college']; ?></td>
+                                                                <td><?= $expitems2['hometown']; ?></td>
+
+                                                                <td><?= $allhobby; ?></td>
+                                                                <td><?= $fieldofinterest; ?></td>
+
+                                                                <td><?= $allexpertise; ?></td>
+                                                                <td><?= $expitems2['email']; ?></td>
+
+
+                                                            </tr>
+                                                    <?php
+                                                        }
+                                                    }
+                                                } else {
+                                                    ?>
                                                     <tr>
                                                         <td colspan="4">No Record Found</td>
                                                     </tr>
-                                                <?php
-                                            }
-                                            }
-                                        }
-
-
-
-                                        else
-                                        {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="4">No Record Found</td>
-                                                </tr>
                                             <?php
-                                        }
-                                        }
-
-
-                                        else
-                                        {
+                                                }
+                                            }
+                                        } else {
                                             ?>
-                                                <tr>
-                                                    <td colspan="4">No Record Found</td>
-                                                </tr>
-                                            <?php
+                                            <tr>
+                                                <td colspan="4">No Record Found</td>
+                                            </tr>
+                                        <?php
                                         }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="4">No Record Found</td>
+                                        </tr>
+                                <?php
                                     }
+                                }
                                 ?>
                             </tbody>
                         </table>
@@ -447,7 +415,9 @@
 
                                 <form action="" method="GET">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="searchDonor" required value="<?php if(isset($_GET['searchDonor'])){echo $_GET['searchDonor']; } ?>" class="form-control" placeholder="Search data">
+                                        <input type="text" name="searchDonor" required value="<?php if (isset($_GET['searchDonor'])) {
+                                                                                                    echo $_GET['searchDonor'];
+                                                                                                } ?>" class="form-control" placeholder="Search data">
                                         <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
                                 </form>
@@ -471,100 +441,84 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $con = mysqli_connect("localhost","root","","bracu_mates");
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "bracu_mates");
 
-                                    if(isset($_GET['searchDonor']))
-                                    {
-                                        $filtervalues = $_GET['searchDonor'];
-                                        $query = "SELECT * FROM donor WHERE CONCAT(name,blood_group,phone) LIKE '%$filtervalues%'";
-                                        $query_run = mysqli_query($con, $query);
+                                if (isset($_GET['searchDonor'])) {
+                                    $filtervalues = $_GET['searchDonor'];
+                                    $query = "SELECT * FROM donor WHERE CONCAT(name,blood_group,phone) LIKE '%$filtervalues%'";
+                                    $query_run = mysqli_query($con, $query);
 
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $items)
-                                            {
-                                                $expertise = $items['id'];
-                                                $allexpertise = "";
+                                    if (mysqli_num_rows($query_run) > 0) {
+                                        foreach ($query_run as $items) {
+                                            $expertise = $items['id'];
+                                            $allexpertise = "";
 
-                                                $expquery = "SELECT * FROM donor_available_location WHERE CONCAT(d_id,location) LIKE '%$expertise%'";
-                                                $expquery_run = mysqli_query($con, $expquery);
-                                                foreach($expquery_run as $expitems){
+                                            $expquery = "SELECT * FROM donor_available_location WHERE CONCAT(d_id,location) LIKE '%$expertise%'";
+                                            $expquery_run = mysqli_query($con, $expquery);
+                                            foreach ($expquery_run as $expitems) {
 
-                                                    $allexpertise .= ", " . $expitems['location'];
-                                                    // 
-                                                }
-                                                $allexpertise = substr($allexpertise,1);
-                                                ?>
-                                                <tr>
-                                                    <td><?= $items['name']; ?></td>
-                                                    <td><?= $items['blood_group']; ?></td>
-                                                    <td><?= $items['phone']; ?></td>
-                                                    <td><?= $allexpertise; ?></td>
-                                                    </tr>
-                                                <?php
-                                                
+                                                $allexpertise .= ", " . $expitems['location'];
+                                                // 
                                             }
-                                        }
+                                            $allexpertise = substr($allexpertise, 1);
+                                ?>
+                                            <tr>
+                                                <td><?= $items['name']; ?></td>
+                                                <td><?= $items['blood_group']; ?></td>
+                                                <td><?= $items['phone']; ?></td>
+                                                <td><?= $allexpertise; ?></td>
+                                            </tr>
+                                            <?php
 
-                                        elseif(mysqli_num_rows($query_run) <= 0)
-                                        {
-                                            $query2 = "SELECT * FROM donor_available_location WHERE CONCAT(d_id,location) LIKE '%$filtervalues%'";
-                                            $query_run2 = mysqli_query($con, $query2);
-                                            if(mysqli_num_rows($query_run2) > 0)
-                                        {   
-                                            foreach($query_run2 as $items){
+                                        }
+                                    } elseif (mysqli_num_rows($query_run) <= 0) {
+                                        $query2 = "SELECT * FROM donor_available_location WHERE CONCAT(d_id,location) LIKE '%$filtervalues%'";
+                                        $query_run2 = mysqli_query($con, $query2);
+                                        if (mysqli_num_rows($query_run2) > 0) {
+                                            foreach ($query_run2 as $items) {
                                                 $al_id = $items['d_id'];
                                                 $query3 = "SELECT * FROM donor_available_location WHERE CONCAT(d_id, location) LIKE '%$al_id%'";
                                                 $query_run3 = mysqli_query($con, $query3);
                                                 $allexpertise = "";
 
 
-                                                foreach($query_run3 as $expitems){
+                                                foreach ($query_run3 as $expitems) {
 
                                                     $allexpertise .= ", " . $expitems['location'];
                                                     // 
                                                 }
-                                                $allexpertise = substr($allexpertise,1);
+                                                $allexpertise = substr($allexpertise, 1);
 
                                                 $expquery2 = "SELECT * FROM donor WHERE CONCAT(name,blood_group,phone) LIKE '%$al_id%'";
                                                 $expquery_run2 = mysqli_query($con, $expquery2);
 
-                                                foreach($expquery_run2 as $expitems2){
-                                                    ?>
+                                                foreach ($expquery_run2 as $expitems2) {
+                                            ?>
                                                     <tr>
-                                                    <td><?= $expitems2['name']; ?></td>
-                                                    <td><?= $expitems2['blood_group']; ?></td>
-                                                    <td><?= $expitems2['phone']; ?></td>
-                                                    <td><?= $allexpertise; ?></td>
+                                                        <td><?= $expitems2['name']; ?></td>
+                                                        <td><?= $expitems2['blood_group']; ?></td>
+                                                        <td><?= $expitems2['phone']; ?></td>
+                                                        <td><?= $allexpertise; ?></td>
                                                     </tr>
-                                                <?php
+                                            <?php
                                                 }
-
                                             }
-                                               
-                                        }
-
-                                        else
-                                        {
+                                        } else {
                                             ?>
-                                                <tr>
-                                                    <td colspan="4">No Record Found</td>
-                                                </tr>
-                                            <?php
+                                            <tr>
+                                                <td colspan="4">No Record Found</td>
+                                            </tr>
+                                        <?php
                                         }
-                                        }
-
-
-                                        else
-                                        {
-                                            ?>
-                                                <tr>
-                                                    <td colspan="4">No Record Found</td>
-                                                </tr>
-                                            <?php
-                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="4">No Record Found</td>
+                                        </tr>
+                                <?php
                                     }
+                                }
                                 ?>
                             </tbody>
                         </table>
@@ -578,4 +532,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
