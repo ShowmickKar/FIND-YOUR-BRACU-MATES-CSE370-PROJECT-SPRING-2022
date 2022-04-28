@@ -34,3 +34,15 @@
 2. [Maidul Islam](https://github.com/Maidul02)
 3. [Eftakhairul Islam](https://github.com/eftykhairul)
 4. [Farjana Alam](https://github.com/nitu2102)
+
+## How to Run this Project
+
+- Clone this project using the terminal command https://github.com/ShowmickKar/FIND-YOUR-BRACU-MATES-CSE370-PROJECT-SPRING-2022-.git
+- Open **Xampp** start `Apache` and `MySQL` Server
+- Import database to `phpMyAdmin`(SQL file located in `db/db.sql`)
+- Go to your browser and enter the `URL:` [localhost/FIND-YOUR-BRACU-MATES-CSE370-PROJECT-SPRING-2022](localhost/FIND-YOUR-BRACU-MATES-CSE370-PROJECT-SPRING-2022)
+- If you've done everything mentioned so far correctly you should see the webpage running on your browser.
+
+## Screenshots
+
+- Will be updated soon
