@@ -27,3 +27,10 @@
 
 - HTML, CSS & Bootstrap on the frontend
 - PHP on the backend and MYSQL for the database.
+
+## Contributors
+
+1. [Showmick Kar](https://github.com/ShowmickKar)
+2. [Maidul Islam](https://github.com/Maidul02)
+3. [Eftakhairul Islam](https://github.com/eftykhairul)
+4. [Farjana Alam](https://github.com/nitu2102)
